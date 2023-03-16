@@ -28,7 +28,7 @@ public class Blog{
 
 
     @OneToMany(mappedBy = "blog",cascade = CascadeType.ALL)
-    List<Image> images = new ArrayList<>(); //one blog can have many images
+    List<Image> imageList = new ArrayList<>(); //one blog can have many images
 
     public Blog(int id, String title, String content, Date pubDate) {
         this.id = id;
@@ -42,12 +42,12 @@ public class Blog{
     public User getUser() {
         return user;
     }
-    public List<Image> getImages() {
-        return images;
+    public List<Image> getImageList() {
+        return imageList;
     }
 
-    public void setImages(List<Image> images) {
-        this.images = images;
+    public void setImageList(List<Image> imageList) {
+        this.imageList = imageList;
     }
 
     public void setUser(User user) {

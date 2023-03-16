@@ -33,7 +33,7 @@ public class ImageService {
         image.setBlog(blog);
 
         //add the image to the blog
-        blog.getImages().add(image);
+        blog.getImageList().add(image);
 
         //saving blog wil save the image too
         blogRepository2.save(blog);
@@ -57,7 +57,7 @@ public class ImageService {
         Blog blog = image.getBlog();
 
         //remove the image from the blog
-        blog.getImages().remove(image);
+        blog.getImageList().remove(image);
 
     }
 
