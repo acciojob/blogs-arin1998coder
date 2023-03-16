@@ -21,13 +21,34 @@ public class BlogService {
     @Autowired
     UserRepository userRepository1;
 
-    public Blog createAndReturnBlog(Integer userId, String title, String content) {
+    public Blog createAndReturnBlog(Integer userId, String title, String content) throws Exception {
         //create a blog at the current time
+        User user;
+        try {
+            user = userRepository1.findById(userId).get();
+        }
+        catch (Exception e){
+            throw new Exception("User is not found! Unable to create Blog");
+        }
+        //create the blog
+        Blog blog = new Blog();
+        blog.setTitle(title);
+        blog.setContent(content);
+        blog.setPubDate(new Date());
 
+        blog.setUser(user); //link the user to the blog
+
+        //add this blog to user's bloglist
+        user.getBlogList().add(blog);
+
+        //save user- blog will get autosaved
+        userRepository1.save(user);
+
+        return blog;
     }
 
     public void deleteBlog(int blogId){
         //delete blog and corresponding images
-
+        blogRepository1.deleteById(blogId);
     }
 }
