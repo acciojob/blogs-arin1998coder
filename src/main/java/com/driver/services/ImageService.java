@@ -36,19 +36,20 @@ public class ImageService {
         return image;
     }
 
-    public void deleteImage(Integer id) throws Exception {
-        Image image;
+    public void deleteImage(Integer id)  {
+        Image image = null;
         //find the image
         try {
             image = imageRepository2.findById(id).get();
         }
         catch (Exception e){
-            throw new Exception("No image found");
+            e.getMessage();
         }
         //image exist so delete it
        imageRepository2.deleteById(id);
 
         //find the blog whose image is this
+        assert image != null;
         Blog blog = image.getBlog();
 
         //remove the image from the blog
