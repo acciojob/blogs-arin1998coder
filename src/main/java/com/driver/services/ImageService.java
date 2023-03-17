@@ -37,22 +37,22 @@ public class ImageService {
     }
 
     public void deleteImage(Integer id)  {
-        Image image = null;
+        Image image;
         //find the image
         try {
             image = imageRepository2.findById(id).get();
+            imageRepository2.deleteById(id);
+
+            //find the blog whose image is this
+            Blog blog = image.getBlog();
+
+            //remove the image from the blog
+            blog.getImageList().remove(image);
         }
         catch (Exception e){
             e.getMessage();
         }
         //image exist so delete it
-       imageRepository2.deleteById(id);
-
-        //find the blog whose image is this
-        Blog blog = image.getBlog();
-
-        //remove the image from the blog
-        blog.getImageList().remove(image);
 
     }
 
