@@ -15,15 +15,10 @@ public class ImageService {
     @Autowired
     ImageRepository imageRepository2;
 
-    public Image addImage(Integer blogId, String description, String dimensions) throws Exception {
+    public Image addImage(Integer blogId, String description, String dimensions) {
         //add an image to the blog
-        Blog blog;
-        try{
-            blog = blogRepository2.findById(blogId).get();
-        }
-        catch (Exception e){
-            throw new Exception("Blog not exist!");
-        }
+        Blog blog=blogRepository2.findById(blogId).get();
+
         //blog exist
 
         Image image = new Image(); //create the image
@@ -41,15 +36,10 @@ public class ImageService {
         return image;
     }
 
-    public void deleteImage(Integer id) throws Exception {
+    public void deleteImage(Integer id){
         //find the image
-        Image image;
-        try {
-            image = imageRepository2.findById(id).get();
-        }
-        catch (Exception e){
-            throw new Exception("Image not found");
-        }
+        Image image = imageRepository2.findById(id).get();
+
         //image exist so delete it
        imageRepository2.deleteById(id);
 
@@ -61,7 +51,7 @@ public class ImageService {
 
     }
 
-    public int countImagesInScreen(Integer id, String screenDimensions) throws Exception {
+    public int countImagesInScreen(Integer id, String screenDimensions)  {
         //Find the number of images of given dimensions that can fit in a screen having `screenDimensions`
 
         int indOfX=screenDimensions.indexOf('X');
@@ -70,13 +60,8 @@ public class ImageService {
         int screenW=Integer.parseInt(screenDimensions.substring(indOfX+1));
 
         //find the image
-        Image image;
-        try{
-            image = imageRepository2.findById(id).get();
-        }
-        catch (Exception e){
-            throw new Exception("Image not found");
-        }
+        Image image=imageRepository2.findById(id).get();
+
         //image is found , extract its wdith and height
         int indxOfXinImage=image.getDimensions().indexOf('X');
 

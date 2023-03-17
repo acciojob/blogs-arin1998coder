@@ -28,15 +28,10 @@ public class UserService {
 
     }
 
-    public User updateUser(Integer id, String password) throws Exception {
-        User user;
-        try {
-            //find the user
-             user = userRepository3.findById(id).get();
-        }
-        catch (Exception e){
-            throw new Exception("User not found");
-        }
+    public User updateUser(Integer id, String password) {
+        User user=userRepository3.findById(id).get();
+
+
         user.setPassword(password); //set the new password
         userRepository3.save(user);
         return user;
