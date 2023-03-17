@@ -49,7 +49,6 @@ public class ImageService {
        imageRepository2.deleteById(id);
 
         //find the blog whose image is this
-        assert image != null;
         Blog blog = image.getBlog();
 
         //remove the image from the blog
