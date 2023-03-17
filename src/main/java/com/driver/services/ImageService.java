@@ -36,10 +36,15 @@ public class ImageService {
         return image;
     }
 
-    public void deleteImage(Integer id){
+    public void deleteImage(Integer id) throws Exception {
+        Image image;
         //find the image
-        Image image = imageRepository2.findById(id).get();
-
+        try {
+            image = imageRepository2.findById(id).get();
+        }
+        catch (Exception e){
+            throw new Exception("No image found");
+        }
         //image exist so delete it
        imageRepository2.deleteById(id);
 
